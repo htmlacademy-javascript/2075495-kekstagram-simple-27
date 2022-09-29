@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм (простой)»
 
 * Студент: [Анастасия Палихова](https://up.htmlacademy.ru/javascript/27/user/2075495).
-* Наставник: [Мария Филлипова](https://htmlacademy.ru/profile/wonderjs).
+* Наставник: [Мария Филиппова](https://htmlacademy.ru/profile/wonderjs).
 
 ---
 
