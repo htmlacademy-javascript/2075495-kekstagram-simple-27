@@ -1,24 +1,17 @@
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 
-const getRandom = (min, max) => {
-  const randomNumber = Math.round(Math.random() * (max - min) + min);
-  if (min < 0 || max < 0) {
-    return NaN;
-  } else if (min >= max) {
+const getRandomNumber = (min, max) => {
+  if (min < 0 || max < 0 || min >= max) {
     return NaN;
   }
+  const randomNumber = Math.round(Math.random() * (max - min) + min);
   return randomNumber;
 };
 
-getRandom(2,5);
+getRandomNumber(2,5);
 
 // Функция для проверки максимальной длины строки
 
-const isStringLengthFine = (anyString, maxLength) => {
-  if (anyString.length > maxLength) {
-    return false;
-  }
-  return true;
-};
+const isStringLengthValid = (string, maxLength) => string.length < maxLength;
 
-isStringLengthFine ('Функция для проверки максимальной длины строки', 5);
+isStringLengthValid ('Функция для проверки максимальной длины строки', 5);
