@@ -1,18 +1,17 @@
-import {getRandomArrayElement, getRandomNumber} from './util.js';
-import {PHOTO_AMOUNT, Like, Comment, DESCRIPTIONS} from './data.js';
+import {getPhotos} from './createphotos.js';
 
-const createPhoto = (_element, index) => {
-  const photoId = index + 1;
+const listPhotos = document.querySelector('.picture').content;
+const templatePhotos = listPhotos.querySelector('.picture');
+const similarPhotos = getPhotos();
+const similarListFragment = document.createDocumentFragment();
 
-  return {
-    id: photoId,
-    url: `photos/${photoId}.jpg`,
-    description: getRandomArrayElement(DESCRIPTIONS),
-    likes: getRandomNumber(Like.MIN, Like.MAX),
-    comments: getRandomNumber(Comment.MIN, Comment.MAX),
-  };
-};
+similarPhotos.forEach((photo) => {
+  const photoElement = templatePhotos.clone.Node(true);
+  photoElement.querySelector('.picture__img').textContent = photo.src;
+  photoElement.querySelector('.picture__comments').textContent = photo.comments;
+  photoElement.querySelector('.picture__likes').textContent = photo.likes;
 
-const getPhotos = () => Array.from({length: PHOTO_AMOUNT}, createPhoto);
+  listPhotos.appendChild(similarListFragment);
 
-export {getPhotos};
+});
+
