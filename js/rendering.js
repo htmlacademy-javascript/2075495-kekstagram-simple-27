@@ -1,18 +1,28 @@
-import {getRandomArrayElement, getRandomNumber} from './util.js';
-import {PHOTO_AMOUNT, Like, Comment, DESCRIPTIONS} from './data.js';
+const photoTemplate = document
+  .querySelector('#picture')
+  .content.querySelector('.picture');
 
-const createPhoto = (_element, index) => {
-  const photoId = index + 1;
+const container = document.querySelector('.pictures');
 
-  return {
-    id: photoId,
-    url: `photos/${photoId}.jpg`,
-    description: getRandomArrayElement(DESCRIPTIONS),
-    likes: getRandomNumber(Like.MIN, Like.MAX),
-    comments: getRandomNumber(Comment.MIN, Comment.MAX),
-  };
+const createPhoto = (data) => {
+  const { comments, description, likes, url } = data;
+  const photo = photoTemplate.cloneNode(true);
+  photo.querySelector('.picture__img').src = url;
+  photo.querySelector('.picture__img').alt = description;
+  photo.querySelector('.picture__comments').textContent = comments;
+  photo.querySelector('.picture__likes').textContent = likes;
+
+  return photo;
 };
 
-const getPhotos = () => Array.from({length: PHOTO_AMOUNT}, createPhoto);
+const renderPhotos = (photos) => {
+  const fragment = document.createDocumentFragment();
+  photos.forEach((photo) => {
+    const photoElement = createPhoto(photo);
+    fragment.append(photoElement);
+  });
 
-export {getPhotos};
+  container.append(fragment);
+};
+
+export {renderPhotos};

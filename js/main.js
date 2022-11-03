@@ -1,3 +1,5 @@
-import {getPhotos} from './rendering.js'; // модуль с функцией для генерации фотокарточек
+import {getPhotos} from './get-photos.js'; // модуль с функцией для генерации фотокарточек
+import {renderPhotos} from './rendering.js';
 
-getPhotos();
+const photos = getPhotos();
+renderPhotos(photos);
