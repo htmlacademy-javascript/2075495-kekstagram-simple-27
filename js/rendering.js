@@ -25,4 +25,5 @@ const renderPhotos = (photos) => {
   container.append(fragment);
 };
 
+
 export {renderPhotos};

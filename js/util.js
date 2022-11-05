@@ -22,4 +22,6 @@ isStringLengthValid ('Функция для проверки максималь�
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-export {getRandomArrayElement, getRandomNumber};
+const isEscapeKey = (evt) => evt.keyCode === 27;
+
+export {getRandomArrayElement, getRandomNumber, isEscapeKey};

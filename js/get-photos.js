@@ -1,5 +1,6 @@
 import {getRandomArrayElement, getRandomNumber} from './util.js';
 import {PHOTO_AMOUNT, Like, Comment, DESCRIPTIONS} from './data.js';
+import {openModal, closeModal} from './form.js';
 
 const createPhoto = (_element, index) => {
   const photoId = index + 1;
