@@ -1,5 +1,25 @@
 import { isEscapeKey } from './util.js'; // вот сейчас подключила функцию и использую ее в коде, но срабатывает на каждую клавишу
 
+/* global Pristine:readonly */
+const uploadForm = document.querySelector('.img-upload__form');
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__form__element',
+  errorTextParent: 'img-upload__form__element',
+  errorTextClass: 'img-upload__form__error-text',
+});
+
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    console.log('Можно отправлять'); // не знаю, какое действие здесь можно написать, чтобы не было консоль-логов?
+  } else {
+    console.log('Форма невалидна');
+  }
+});
+
+
 const uploadFileInput = document.querySelector('#upload-file');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
