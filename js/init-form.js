@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js'; // вот сейчас подключила функцию и использую ее в коде, но срабатывает на каждую клавишу
+import { isEscapeKey } from './util.js';
 
 /* global Pristine:readonly */
 const uploadForm = document.querySelector('.img-upload__form');
@@ -19,13 +19,12 @@ uploadForm.addEventListener('submit', (evt) => {
   }
 });
 
-
 const uploadFileInput = document.querySelector('#upload-file');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 function onModalEscKeydown (evt) {
-  if (isEscapeKey) {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeModal ();
   }
