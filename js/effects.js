@@ -1,7 +1,7 @@
 
 const imageUploadPreview = document.querySelector('.img-upload__preview');
 const effectLevel = document.querySelector('.effect-level');
-const setDefaultDepthValue = document.querySelector('.effect-level__slider');
+// const setDefaultDepthValue = document.querySelector('.effect-level__slider');
 
 const pictureEffects = document.querySelectorAll('.effects__radio');
 
@@ -14,27 +14,13 @@ const effectMap = {
   'effect-heat': 'effects__preview--heat'
 };
 
-// imageUploadPreview.className.split('').find('effects'.includes);
-
-// нормальная функция — потом раскомментить
-// const removePreviousEffect = function () {
-//   const effectClass = imageUploadPreview.className;
-//   console.log(effectClass);
-//   if (effectClass.match('effects__preview--')) {
-//     imageUploadPreview.classList.remove(effectClass);
-//     console.log(effectClass);
-//   }
-//   console.log(effectClass);
-// };
-
 const removePreviousEffect = function () {
   const effectClass = imageUploadPreview.className;
-  const effectsClassMassive = effectClassOne.split(' ');
-
+  const effectsClassMassive = effectClass.split(' ');
   if (effectsClassMassive.includes('effects__preview--')) {
-    imageUploadPreview.classList.remove(effectClass);
+    imageUploadPreview.classList.remove(effectsClassMassive[1]);
   }
-};
+}; // тут пока не разобралась, как применять метод find, чтобы не пользоваться индексом в массиве
 
 const showEffectLevel = function () {
   if (effectLevel.classList.contains('hidden')) {
@@ -47,7 +33,7 @@ const hideEffectLevel = function () {
 };
 
 const applyNewEffect = function (styleClass) {
-  if (styleClass.match('effects__preview--none')) {
+  if (styleClass.includes('effects__preview--none')) {
     hideEffectLevel();
   } else {
     showEffectLevel();
@@ -55,6 +41,7 @@ const applyNewEffect = function (styleClass) {
 
   // setDefaultDepthValue();
   imageUploadPreview.classList.add(styleClass);
+
 };
 
 const effectClickHandler = function (evt) {
