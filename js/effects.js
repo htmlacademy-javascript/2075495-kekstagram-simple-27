@@ -1,6 +1,6 @@
 
 const imageUploadPreview = document.querySelector('.img-upload__preview');
-const effectLevel = document.querySelector('.effect-level')
+const effectLevel = document.querySelector('.effect-level');
 const setDefaultDepthValue = document.querySelector('.effect-level__slider');
 
 const pictureEffects = document.querySelectorAll('.effects__radio');
@@ -14,10 +14,24 @@ const effectMap = {
   'effect-heat': 'effects__preview--heat'
 };
 
+// imageUploadPreview.className.split('').find('effects'.includes);
+
+// нормальная функция — потом раскомментить
+// const removePreviousEffect = function () {
+//   const effectClass = imageUploadPreview.className;
+//   console.log(effectClass);
+//   if (effectClass.match('effects__preview--')) {
+//     imageUploadPreview.classList.remove(effectClass);
+//     console.log(effectClass);
+//   }
+//   console.log(effectClass);
+// };
+
 const removePreviousEffect = function () {
   const effectClass = imageUploadPreview.className;
+  const effectsClassMassive = effectClassOne.split(' ');
 
-  if (effectClass.match('effects__preview--')) {
+  if (effectsClassMassive.includes('effects__preview--')) {
     imageUploadPreview.classList.remove(effectClass);
   }
 };
@@ -39,7 +53,7 @@ const applyNewEffect = function (styleClass) {
     showEffectLevel();
   }
 
-  setDefaultDepthValue();
+  // setDefaultDepthValue();
   imageUploadPreview.classList.add(styleClass);
 };
 
@@ -69,7 +83,6 @@ window.effect = {
 
 const initEffects = () => {
   createEffectsHandlers();
-  removeEffectsHandlers();
 };
 
 export {initEffects};
