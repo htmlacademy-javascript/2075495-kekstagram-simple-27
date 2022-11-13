@@ -1,4 +1,6 @@
 import { isEscapeKey } from './util.js';
+import { removeEffectsHandlers } from './effects.js';
+import { removeScale } from './scale.js';
 
 const uploadFileInput = document.querySelector('#upload-file');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
@@ -29,6 +31,8 @@ function closeModal () {
   document.removeEventListener('keydown', onModalEscKeydown);
   cancelButton.removeEventListener('click', onCancelButtonClick);
   uploadFileInput.value = '';
+  removeEffectsHandlers();
+  removeScale();
 }
 
 function initForm () {

@@ -17,10 +17,14 @@ const effectMap = {
 const removePreviousEffect = function () {
   const effectClass = imageUploadPreview.className;
   const effectsClassMassive = effectClass.split(' ');
-  if (effectsClassMassive.includes('effects__preview--')) {
-    imageUploadPreview.classList.remove(effectsClassMassive[1]);
+  const isEffect = () => {
+    effectsClassMassive.includes('effects__preview--');
+  };
+  const effect = effectsClassMassive.find(isEffect);
+  if (isEffect) {
+    imageUploadPreview.classList.remove(effect);
   }
-}; // тут пока не разобралась, как применять метод find, чтобы не пользоваться индексом в массиве
+};
 
 const showEffectLevel = function () {
   if (effectLevel.classList.contains('hidden')) {
@@ -49,28 +53,27 @@ const effectClickHandler = function (evt) {
   applyNewEffect(effectMap[evt.target.id]);
 };
 
-const createEffectsHandlers = function () {
-  pictureEffects.forEach((effect) => {
-    effect.addEventListener('click', effectClickHandler);
-  });
-};
-
 const removeEffectsHandlers = function () {
   pictureEffects.forEach((effect) => {
     effect.removeEventListener('click', effectClickHandler);
   });
 };
 
-window.effect = {
-  remove: removePreviousEffect,
-  hideLevel: hideEffectLevel,
-  createHandlers: createEffectsHandlers,
-  removeHandlers: removeEffectsHandlers
-};
+// window.effect = {
+//   remove: removePreviousEffect,
+//   hideLevel: hideEffectLevel,
+//   createHandlers: createEffectsHandlers,
+//   removeHandlers: removeEffectsHandlers
+// };
 
 const initEffects = () => {
+  const createEffectsHandlers = function () {
+    pictureEffects.forEach((effect) => {
+      effect.addEventListener('click', effectClickHandler);
+    });
+  };
   createEffectsHandlers();
 };
 
-export {initEffects};
+export {initEffects, removeEffectsHandlers};
 

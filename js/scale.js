@@ -1,5 +1,5 @@
-const ControlDec = document.querySelector('.scale__control--smaller');
-const ControlInc = document.querySelector('.scale__control--bigger');
+const controlDec = document.querySelector('.scale__control--smaller');
+const controlInc = document.querySelector('.scale__control--bigger');
 const scaleInput = document.querySelector('.scale__control--value');
 const previewImage = document.querySelector('.img-upload__preview').querySelector('img');
 const Scale = {
@@ -13,30 +13,40 @@ const updateScaleValue = (newValue) => {
   previewImage.style.transform = (`scale(${newValue / 100})`);
 };
 
-const onControlDec = () => {
-  ControlDec.addEventListener('click', (evt) => {
-    const getScaleValue = () => parseInt(scaleInput.value, 10);
+const getScaleValue = () => parseInt(scaleInput.value, 10);
+
+
+const onControlDecClick = () => {
+  controlDec.addEventListener('click', (evt) => {
     evt.preventDefault();
-    if (((getScaleValue - Scale.STEP) > Scale.MIN) && ((getScaleValue + Scale.STEP) <= Scale.MAX)) {
-      return updateScaleValue(getScaleValue - Scale.STEP);
+    const scaleValue = getScaleValue();
+    const newScaleValue = scaleValue - Scale.STEP;
+    if (newScaleValue >= Scale.MIN) {
+      updateScaleValue(newScaleValue);
     }
   });
 };
 
-const onControlInc = () => {
-  ControlInc.addEventListener('click', (evt) => {
-    const getScaleValue = () => parseInt(scaleInput.value, 10);
+const onControlIncClick = () => {
+  controlInc.addEventListener('click', (evt) => {
     evt.preventDefault();
-    if (((getScaleValue - Scale.STEP) > Scale.MIN) && ((getScaleValue + Scale.STEP) <= Scale.MAX)) {
-      return updateScaleValue(getScaleValue + Scale.STEP);
+    const scaleValue = getScaleValue();
+    const newScaleValue = scaleValue + Scale.STEP;
+    if (newScaleValue <= Scale.MAX) {
+      updateScaleValue(newScaleValue);
     }
   });
 };
 
 const initScale = () => {
-  onControlDec();
-  onControlInc();
+  controlDec.addEventListener('click', onControlDecClick);
+  controlInc.addEventListener('click', onControlIncClick);
 };
 
-export {initScale};
+const removeScale = () => {
+  controlDec.removeEventListener('click', onControlDecClick);
+  controlInc.removeEventListener('click', onControlIncClick);
+};
+
+export {initScale, removeScale};
 
