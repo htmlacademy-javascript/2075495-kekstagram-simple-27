@@ -1,8 +1,6 @@
 
 const imageUploadPreview = document.querySelector('.img-upload__preview');
 const effectLevel = document.querySelector('.effect-level');
-// const setDefaultDepthValue = document.querySelector('.effect-level__slider');
-
 const pictureEffects = document.querySelectorAll('.effects__radio');
 
 const effectMap = {
@@ -17,12 +15,10 @@ const effectMap = {
 const removePreviousEffect = function () {
   const effectClass = imageUploadPreview.className;
   const effectsClassMassive = effectClass.split(' ');
-  const isEffect = () => {
-    effectsClassMassive.includes('effects__preview--');
-  };
-  const effect = effectsClassMassive.find(isEffect);
-  if (isEffect) {
-    imageUploadPreview.classList.remove(effect);
+  const isEffect = (evt) => evt.includes('effects__preview--');
+  const effect = isEffect(effectClass);
+  if (effect) {
+    imageUploadPreview.classList.remove(effectsClassMassive[1]);
   }
 };
 
@@ -42,10 +38,7 @@ const applyNewEffect = function (styleClass) {
   } else {
     showEffectLevel();
   }
-
-  // setDefaultDepthValue();
   imageUploadPreview.classList.add(styleClass);
-
 };
 
 const effectClickHandler = function (evt) {
@@ -58,13 +51,6 @@ const removeEffectsHandlers = function () {
     effect.removeEventListener('click', effectClickHandler);
   });
 };
-
-// window.effect = {
-//   remove: removePreviousEffect,
-//   hideLevel: hideEffectLevel,
-//   createHandlers: createEffectsHandlers,
-//   removeHandlers: removeEffectsHandlers
-// };
 
 const initEffects = () => {
   const createEffectsHandlers = function () {
