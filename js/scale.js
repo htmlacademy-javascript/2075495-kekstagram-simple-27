@@ -1,3 +1,5 @@
+// надо спрятать шкалу на дефолтном изображении
+
 const controlDec = document.querySelector('.scale__control--smaller');
 const controlInc = document.querySelector('.scale__control--bigger');
 const scaleInput = document.querySelector('.scale__control--value');
@@ -9,42 +11,42 @@ const Scale = {
   DEFAULT: 100,
 };
 
-const scaleImage = (value = Scale.DEFAULT) => {
+const updateScaleValue = (value = Scale.DEFAULT) => {
   previewImage.style.transform = `scale(${value / 100})`;
   scaleInput.value = `${value}%`;
 };
 
+const getScaleValue = () => parseInt(scaleInput.value, 10);
+
 const onControlDecClick = () => {
-  const currentValue = parseInt(scaleInput.value, 10);
+  const currentValue = getScaleValue();
   let newValue = currentValue - Scale.STEP;
   if (newValue < Scale.MIN) {
     newValue = Scale.MIN;
   }
-  scaleImage(newValue);
+  updateScaleValue(newValue);
 };
 
 const onControlIncClick = () => {
-  const currentValue = parseInt(scaleInput.value, 10);
+  const currentValue = getScaleValue();
   let newValue = currentValue + Scale.STEP;
   if (newValue > Scale.MAX) {
     newValue = Scale.MAX;
   }
-  scaleImage(newValue);
+  updateScaleValue(newValue);
 };
 
 const resetScale = () => {
-  scaleImage();
+  controlDec.removeEventListener('click', onControlDecClick);
+  controlInc.removeEventListener('click', onControlIncClick);
 };
 
-controlDec.addEventListener('click', onControlDecClick);
-controlInc.addEventListener('click', onControlIncClick);
+const initScale = () => {
+  updateScaleValue();
+  controlDec.addEventListener('click', onControlDecClick);
+  controlInc.addEventListener('click', onControlIncClick);
+};
 
-// const updateScaleValue = (value = Scale.DEFAULT) => {
-//   previewImage.style.transform = (`scale(${value / 100})`);
-//   scaleInput.value = `${value}%`;
-// };
-
-// const getScaleValue = () => parseInt(scaleInput.value, 10);
 
 // const onControlDecClick = () => {
 //   controlDec.addEventListener('click', (evt) => {
@@ -69,10 +71,5 @@ controlInc.addEventListener('click', onControlIncClick);
 //   });
 // };
 
-// const initScale = () => {
-//   controlDec.addEventListener('click', onControlDecClick);
-//   controlInc.addEventListener('click', onControlIncClick);
-// };
-
-export {resetScale};
+export {initScale, resetScale};
 

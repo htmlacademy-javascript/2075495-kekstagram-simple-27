@@ -6,60 +6,51 @@ const form = document.querySelector('.img-upload__form');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 
-const EFFECTS = [
-  {
-    name: 'none',
-    min: 0,
-    max: 100,
-    step: 1,
+const EFFECTS = {
+  none: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 1,
+    FILTER: 'none'
   },
-  {
-    name: 'chrome',
-    style: 'grayscale',
-    min: 0,
-    max: 1,
-    step: 0.1,
-    unit: '',
+  chrome: {
+    MIN: 0,
+    MAX: 1,
+    STEP: 0.1,
+    FILTER: 'grayscale',
+    UNIT: '',
   },
-  {
-    name: 'sepia',
-    style: 'sepia',
-    min: 0,
-    max: 1,
-    step: 0.1,
-    unit: '',
+  sepia: {
+    MIN: 0,
+    MAX: 1,
+    STEP: 0.1,
+    FILTER: 'sepia',
+    UNIT: '',
   },
-  {
-    name: 'marvin',
-    style: 'invert',
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: '%',
+  marvin: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 1,
+    FILTER: 'invert',
+    UNIT: '%',
   },
-  {
-    name: 'phobos',
-    style: 'blur',
-    min: 0,
-    max: 3,
-    step: 0.1,
-    unit: 'px',
+  phobos: {
+    MIN: 0,
+    MAX: 3,
+    STEP: 0.1,
+    FILTER: 'blur',
+    UNIT: 'px',
   },
-  {
-    name: 'heat',
-    style: 'brightness',
-    min: 1,
-    max: 3,
-    step: 0.1,
-    unit: '',
+  heat: {
+    MIN: 1,
+    MAX: 3,
+    STEP: 0.1,
+    FILTER: 'brightness',
+    UNIT: '',
   },
-];
+};
 
-const DEFAULT_EFFECT = EFFECTS[0];
-let chosenEffect = DEFAULT_EFFECT;
-
-const isDefault = () => chosenEffect === DEFAULT_EFFECT;
-
+// помню, что effectMap надо убрать, но пока хз как. Если убираю, у меня ломается applyNewEffect и effectClickHandler
 const effectMap = {
   'effect-none': 'effects__preview--none',
   'effect-chrome': 'effects__preview--chrome',
@@ -68,6 +59,11 @@ const effectMap = {
   'effect-phobos': 'effects__preview--phobos',
   'effect-heat': 'effects__preview--heat'
 };
+
+const DEFAULT_EFFECT = EFFECTS.none;
+let chosenEffect = DEFAULT_EFFECT;
+
+const isSliderShown = () => chosenEffect === DEFAULT_EFFECT;
 
 const removePreviousEffect = function () {
   const effectClass = imageUploadPreview.className;
@@ -90,7 +86,8 @@ const hideEffectLevel = function () {
 };
 
 const applyNewEffect = function (styleClass) {
-  if (styleClass.includes('effects__preview--none')) {
+  if (styleClass.includes('effects__preview--none'))
+  {
     hideEffectLevel();
   } else {
     showEffectLevel();
@@ -122,40 +119,39 @@ const updateSlider = () => {
   sliderElement.classList.remove('hidden');
   sliderElement.noUiSlider.updateOptions({
     range: {
-      min: chosenEffect.min,
-      max: chosenEffect.max,
+      min: chosenEffect.MIN,
+      max: chosenEffect.MAX,
     },
-    step: chosenEffect.step,
-    start: chosenEffect.max,
+    step: chosenEffect.STEP,
+    start: chosenEffect.MAX,
   });
 
-  if (isDefault()) {
+  if (isSliderShown()) {
     sliderElement.classList.add('hidden');
   }
 };
 
 const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
+  effectLevelValue.value = sliderValue;
   imageUploadPreview.style.filter = `${chosenEffect.style}${sliderValue}${chosenEffect.unit}`;
 };
 
 noUiSlider.create(sliderElement, {
   range: {
-    min: DEFAULT_EFFECT.min,
-    max: DEFAULT_EFFECT.max,
+    min: DEFAULT_EFFECT.MIN,
+    max: DEFAULT_EFFECT.MAX,
   },
-  start: DEFAULT_EFFECT.max,
-  step: DEFAULT_EFFECT.step,
+  start: DEFAULT_EFFECT.MAX,
+  step: DEFAULT_EFFECT.STEP,
   connect: 'lower',
 });
-updateSlider();
-
 
 const onFormChange = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
+  chosenEffect = (effect) => EFFECTS[effect.name] === evt.target.value;
   updateSlider();
 };
 
