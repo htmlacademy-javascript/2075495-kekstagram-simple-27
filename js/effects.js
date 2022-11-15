@@ -139,8 +139,8 @@ const onSliderUpdate = () => {
 
 noUiSlider.create(sliderElement, {
   range: {
-    min: 0,
-    max: 100,
+    min:  DEFAULT_EFFECT.MIN,
+    max:  DEFAULT_EFFECT.MAX,
   },
   start: DEFAULT_EFFECT.MAX,
   step: DEFAULT_EFFECT.STEP,
