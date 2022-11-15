@@ -139,12 +139,23 @@ const onSliderUpdate = () => {
 
 noUiSlider.create(sliderElement, {
   range: {
-    min: DEFAULT_EFFECT.MIN,
-    max: DEFAULT_EFFECT.MAX,
+    min: 0,
+    max: 100,
   },
   start: DEFAULT_EFFECT.MAX,
   step: DEFAULT_EFFECT.STEP,
   connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
 });
 
 const onFormChange = (evt) => {
