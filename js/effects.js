@@ -135,12 +135,6 @@ const updateSlider = () => {
 };
 
 const onSliderUpdate = () => {
-  imageUploadPreview.style.filter = 'none';
-  imageUploadPreview.className = '';
-  effectLevelValue.value = '';
-  if (isDefault()) {
-    return;
-  }
   const sliderValue = sliderElement.noUiSlider.get();
   imageUploadPreview.style.filter = `${chosenEffect.style}${sliderValue}${chosenEffect.unit}`;
 };
