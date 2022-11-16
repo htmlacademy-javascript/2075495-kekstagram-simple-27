@@ -67,9 +67,9 @@ const removePreviousEffect = function () {
   }
 };
 
-// const showEffectLevel = function () {
-//   effectLevel.classList.remove('hidden');
-// };
+const showEffectLevel = function () {
+  effectLevel.classList.remove('hidden');
+};
 
 const hideEffectLevel = function () {
   effectLevel.classList.add('hidden');
@@ -84,6 +84,7 @@ const showSliderElement = () => sliderElement.classList.remove('hidden');
 const hideSliderElement = () => sliderElement.classList.add('hidden');
 
 const updateSlider = () => {
+  showEffectLevel();
   showSliderElement();
   sliderElement.noUiSlider.updateOptions({
     range: {
