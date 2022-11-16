@@ -77,6 +77,7 @@ const hideEffectLevel = function () {
 
 const applyNewEffect = function () {
   const newEffectClass = `effects__preview--${chosenEffect.name}`;
+
   imageUploadPreview.classList.add(newEffectClass);
 };
 
@@ -109,7 +110,7 @@ const initEffects = () => {
 const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
   effectLevelValue.value = sliderValue;
-  imageUploadPreview.style.filter = `${chosenEffect.style}${sliderValue}${chosenEffect.unit}`;
+  imageUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
 
   if (isDefaultEffect()) {
     hideSliderElement();
