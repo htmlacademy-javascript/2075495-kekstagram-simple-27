@@ -1,4 +1,6 @@
 import { isEscapeKey } from './util.js';
+import { initEffects, resetEffects} from './effects.js';
+import { initScale, resetScale } from './scale.js';
 
 const uploadFileInput = document.querySelector('#upload-file');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
@@ -20,6 +22,8 @@ function openModal () {
   body.classList.add('.modal-open');
   document.addEventListener('keydown', onModalEscKeydown);
   cancelButton.addEventListener('click', onCancelButtonClick);
+  initScale();
+  initEffects();
 }
 
 // закрывает окно редактирования фото
@@ -29,6 +33,8 @@ function closeModal () {
   document.removeEventListener('keydown', onModalEscKeydown);
   cancelButton.removeEventListener('click', onCancelButtonClick);
   uploadFileInput.value = '';
+  resetScale();
+  resetEffects();
 }
 
 function initForm () {
