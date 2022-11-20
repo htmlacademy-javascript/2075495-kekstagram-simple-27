@@ -82,15 +82,21 @@ const applyNewEffect = function () {
 };
 
 const updateSlider = () => {
-  showEffectLevel();
-  sliderElement.noUiSlider.updateOptions({
-    range: {
-      min: chosenEffect.min,
-      max: chosenEffect.max,
-    },
-    step: chosenEffect.step,
-    start: chosenEffect.max,
-  });
+  if (isDefaultEffect()) {
+    imageUploadPreview.style.filter = '';
+    effectLevelValue.value = '';
+    hideEffectLevel();
+  } else {
+    showEffectLevel();
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: chosenEffect.min,
+        max: chosenEffect.max,
+      },
+      step: chosenEffect.step,
+      start: chosenEffect.max,
+    });
+  }
 };
 
 const resetEffects = function () {
@@ -108,12 +114,6 @@ const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
   effectLevelValue.value = sliderValue;
   imageUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
-
-  if (isDefaultEffect()) {
-    imageUploadPreview.style.filter = '';
-    effectLevelValue.value = '';
-    hideEffectLevel();
-  }
 };
 
 noUiSlider.create(sliderElement, {
