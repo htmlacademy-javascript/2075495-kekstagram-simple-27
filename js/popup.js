@@ -1,6 +1,5 @@
 import { isEscapeKey } from './util.js';
 
-const popup = document.querySelector('.popup');
 const ALERT_SHOW_TIME = 5000;
 
 const showAlert = () => {
@@ -36,56 +35,6 @@ const onCloseButtonClick = () => {
   closePopup();
 };
 
-const successSubmitHandler = () => {
-
-  const successPopup = successPopupTemplate.cloneNode(true);
-  document.body.appendChild(successPopup);
-  const closeButton = successPopup.querySelector('.success__button');
-
-  closeButton.addEventListener('click', () => {
-    closeButton.addEventListener('click', onCloseButtonClick);
-    document.addEventListener('keydown', onDocumentKeydown);
-    document.addEventListener('click', onDocumentClick);
-  });
-
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      successPopup.remove();
-    }
-  });
-
-  document.addEventListener('click', (evt) => {
-    if (evt.target.className === 'popup') {
-      successPopup.remove();
-    }
-  });
-};
-
-const errorSubmitHandler = () => {
-  const errorPopup = errorPopupTemplate.cloneNode(true);
-  document.body.appendChild(errorPopup);
-  const closeErrorButton = errorPopup.querySelector('.error__button');
-
-  closeErrorButton.addEventListener('click', () => {
-    errorPopup.remove();
-  }, {once: true});
-
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      errorPopup.remove();
-    }
-  }, {once: true});
-
-  document.addEventListener('click', (evt) => {
-    if (evt.target.id !== 'error') {
-      errorPopup.remove();
-    }
-  }, {once: true});
-};
-
-
-// новострой
-
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -98,24 +47,25 @@ function onDocumentClick() {
 }
 
 function openSuccessPopup() {
-  popup.querySelector('.button').addEventListener('click', onCloseButtonClick);
-  popup.add(successSubmitHandler()); // не понимаю что сюда надо добавить...
+  const successPopup = successPopupTemplate.cloneNode(true);
+  successPopup.querySelector('.button').addEventListener('click', onCloseButtonClick);
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
 function openErrorPopup() {
-  popup.querySelector('.button').addEventListener('click', onCloseButtonClick);
-  popup.add(successSubmitHandler()); // не понимаю что сюда надо добавить...
+  const errorPopup = errorPopupTemplate.cloneNode(true);
+  errorPopup.querySelector('.button').addEventListener('click', onCloseButtonClick);
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
 function closePopup() {
+  const popup = document.querySelector('.popup');
   popup.querySelector('.button').removeEventListener('click', onCloseButtonClick);
   popup.remove();
   document.removeEventListener('click', onDocumentClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-export { showAlert, successSubmitHandler, errorSubmitHandler };
+export { showAlert, openSuccessPopup, openErrorPopup };

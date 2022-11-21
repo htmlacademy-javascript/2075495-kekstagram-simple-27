@@ -1,5 +1,5 @@
 import { isEscapeKey, isStringLengthValid } from './util.js';
-import { successSubmitHandler, errorSubmitHandler } from './popup.js';
+import { openSuccessPopup, openErrorPopup } from './popup.js';
 import { initEffects, resetEffects} from './effects.js';
 import { initScale, resetScale } from './scale.js';
 import { sendData } from './network.js';
@@ -50,21 +50,31 @@ const unblockSubmitButton = () => {
   submitButton.disabled = false;
 };
 
-function initForm (onSuccess, onFail) {
+const onSuccess = () => {
+  openSuccessPopup();
+};
+
+const onError = () => {
+  openErrorPopup();
+};
+
+
+function initForm () {
   uploadFileInput.addEventListener('change', () => {
     openModal();
   });
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    if (isStringLengthValid(Comment, Comment.MAX)) { // вот тут не знаю, как проверку сделать
+    if (isStringLengthValid(Comment, Comment.MAX)) {
       blockSubmitButton();
-      sendData(onSuccess, onFail, new FormData(evt.target))
-        .then(() => closeModal())
-        .then(() => unblockSubmitButton());
+      sendData(onSuccess, onError, new FormData(evt.target))
+        .then(() => {
+          closeModal();
+          unblockSubmitButton();
+        });
     }
   });
 }
 
-initForm(successSubmitHandler, errorSubmitHandler);
 
 export {initForm};

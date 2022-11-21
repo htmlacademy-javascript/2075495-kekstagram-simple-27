@@ -4,4 +4,3 @@ import { getData } from './network.js';
 import { showAlert } from './popup.js';
 
 getData(renderPhotos, showAlert).then(() => initForm());
-
