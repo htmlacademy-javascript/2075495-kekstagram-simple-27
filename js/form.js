@@ -1,11 +1,15 @@
 import { isEscapeKey } from './util.js';
 import { initEffects, resetEffects} from './effects.js';
 import { initScale, resetScale } from './scale.js';
+import { sendData } from './network.js';
 
 const uploadFileInput = document.querySelector('#upload-file');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
+const form = document.querySelector('.img-upload__form');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
+const submitButton = form.querySelector('#upload-submit');
+
 function onModalEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -37,9 +41,26 @@ function closeModal () {
   resetEffects();
 }
 
-function initForm () {
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+};
+
+function initForm (onSuccess, onFail) {
   uploadFileInput.addEventListener('change', () => {
     openModal();
+  });
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if (Comment > Comment.MAX) { // вот тут не знаю, как проверку сделать без пристина. или у меня и так кнопка заблокируется?
+      blockSubmitButton();
+      sendData(onSuccess, onFail, new FormData(evt.target))
+        .then(() => closeModal())
+        .then(() => unblockSubmitButton());
+    }
   });
 }
 
