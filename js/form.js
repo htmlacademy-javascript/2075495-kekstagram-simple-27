@@ -1,4 +1,5 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey, isStringLengthValid } from './util.js';
+import { successSubmitHandler, errorSubmitHandler } from './popup.js';
 import { initEffects, resetEffects} from './effects.js';
 import { initScale, resetScale } from './scale.js';
 import { sendData } from './network.js';
@@ -55,7 +56,7 @@ function initForm (onSuccess, onFail) {
   });
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    if (Comment > Comment.MAX) { // вот тут не знаю, как проверку сделать без пристина. или у меня и так кнопка заблокируется?
+    if (isStringLengthValid(Comment, Comment.MAX)) { // вот тут не знаю, как проверку сделать
       blockSubmitButton();
       sendData(onSuccess, onFail, new FormData(evt.target))
         .then(() => closeModal())
@@ -63,5 +64,7 @@ function initForm (onSuccess, onFail) {
     }
   });
 }
+
+initForm(successSubmitHandler, errorSubmitHandler);
 
 export {initForm};
