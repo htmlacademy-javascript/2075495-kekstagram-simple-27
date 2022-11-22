@@ -4,12 +4,12 @@ import { initEffects, resetEffects} from './effects.js';
 import { initScale, resetScale } from './scale.js';
 import { sendData } from './network.js';
 
-const uploadFileInput = document.querySelector('#upload-file');
+const uploadFileInput = document.querySelector('.img-upload__input');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
 const body = document.querySelector('body');
-const cancelButton = document.querySelector('#upload-cancel');
-const submitButton = form.querySelector('#upload-submit');
+const cancelButton = document.querySelector('.img-upload__cancel');
+const submitButton = form.querySelector('.img-upload__submit');
 
 const onModalEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
