@@ -18,8 +18,7 @@ const createPhoto = (data) => {
 const renderPhotos = (photos) => {
   const fragment = document.createDocumentFragment();
   photos.forEach((photo) => {
-    const photoElement = createPhoto(photo);
-    fragment.append(photoElement);
+    fragment.append(createPhoto(photo));
   });
 
   container.append(fragment);
