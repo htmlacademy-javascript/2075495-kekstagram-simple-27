@@ -1,13 +1,14 @@
-const controlDec = document.querySelector('.scale__control--smaller');
-const controlInc = document.querySelector('.scale__control--bigger');
-const scaleInput = document.querySelector('.scale__control--value');
-const previewImage = document.querySelector('.img-upload__preview').querySelector('img'); // почему-то все сломалось
 const Scale = {
   STEP: 25,
   MIN: 25,
   MAX: 100,
   DEFAULT: 100,
 };
+
+const controlDec = document.querySelector('.scale__control--smaller');
+const controlInc = document.querySelector('.scale__control--bigger');
+const scaleInput = document.querySelector('.scale__control--value');
+const previewImage = document.querySelector('.img-upload__preview').querySelector('img'); // почему-то все сломалось
 
 const updateScaleValue = (value = Scale.DEFAULT) => {
   previewImage.style.transform = `scale(${value / 100})`;

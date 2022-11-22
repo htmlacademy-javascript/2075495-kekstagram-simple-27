@@ -1,27 +1,28 @@
-import { isEscapeKey } from './util.js';
 import { openSuccessPopup, openErrorPopup } from './popup.js';
 import { initEffects, resetEffects} from './effects.js';
 import { initScale, resetScale } from './scale.js';
 import { sendData } from './network.js';
 
-const uploadFileInput = document.querySelector('#upload-file');
+const uploadFileInput = document.querySelector('.img-upload__input');
 const imageUploadForm = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
 const body = document.querySelector('body');
-const cancelButton = document.querySelector('#upload-cancel');
-const submitButton = form.querySelector('#upload-submit');
+const cancelButton = document.querySelector('.img-upload__cancel');
+const submitButton = form.querySelector('.img-upload__submit');
 
-function onModalEscKeydown (evt) {
+const isEscapeKey = (evt) => evt.keyCode === 27;
+
+const onModalEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeModal();
   }
-}
-function onCancelButtonClick () {
-  closeModal();
-}
+};
 
-// открывает окно редактирования фото
+const onCancelButtonClick = () => {
+  closeModal();
+};
+
 function openModal () {
   imageUploadForm.classList.remove('hidden');
   body.classList.add('.modal-open');
@@ -31,7 +32,6 @@ function openModal () {
   initEffects();
 }
 
-// закрывает окно редактирования фото
 function closeModal () {
   imageUploadForm.classList.add('hidden');
   body.classList.remove('.modal-open');
@@ -53,6 +53,7 @@ const unblockSubmitButton = () => {
 
 const onSuccess = () => {
   openSuccessPopup();
+  closeModal();
 };
 
 const onError = () => {
@@ -60,7 +61,7 @@ const onError = () => {
 };
 
 
-function initForm () {
+const initForm = () => {
   uploadFileInput.addEventListener('change', () => {
     openModal();
   });
@@ -69,11 +70,10 @@ function initForm () {
     blockSubmitButton();
     sendData(onSuccess, onError, new FormData(evt.target))
       .then(() => {
-        closeModal();
         unblockSubmitButton();
       });
   });
-}
+};
 
 
-export {initForm};
+export {initForm, isEscapeKey};

@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from './form.js';
 
 const ALERT_SHOW_TIME = 5000;
 
@@ -35,16 +35,16 @@ const onCloseButtonClick = () => {
   closePopup();
 };
 
-function onDocumentKeydown(evt) {
+const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closePopup();
   }
-}
+};
 
-function onDocumentClick() {
+const onDocumentClick = () => {
   closePopup();
-}
+};
 
 function openSuccessPopup() {
   const successPopup = successPopupTemplate.cloneNode(true);
