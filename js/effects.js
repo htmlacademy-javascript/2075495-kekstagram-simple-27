@@ -1,9 +1,3 @@
-const imageUploadPreview = document.querySelector('.img-upload__preview');
-const effectLevel = document.querySelector('.effect-level');
-const form = document.querySelector('.img-upload__form');
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectLevelValue = document.querySelector('.effect-level__value');
-
 const EFFECTS = [
   {
     name: 'none',
@@ -54,9 +48,16 @@ const EFFECTS = [
 ];
 
 const DEFAULT_EFFECT = EFFECTS[0];
+
 let chosenEffect = DEFAULT_EFFECT;
 
 const isDefaultEffect = () => chosenEffect === DEFAULT_EFFECT;
+
+const imageUploadPreview = document.querySelector('.img-upload__preview');
+const effectLevel = document.querySelector('.effect-level');
+const form = document.querySelector('.img-upload__form');
+const slider = document.querySelector('.effect-level__slider');
+const effectLevelValue = document.querySelector('.effect-level__value');
 
 const removePreviousEffect = function () {
   const prevClasses = imageUploadPreview.className.split(' ');
@@ -87,7 +88,7 @@ const updateSlider = () => {
     hideEffectLevel();
   } else {
     showEffectLevel();
-    sliderElement.noUiSlider.updateOptions({
+    slider.noUiSlider.updateOptions({
       range: {
         min: chosenEffect.min,
         max: chosenEffect.max,
@@ -110,12 +111,12 @@ const initEffects = () => {
 };
 
 const onSliderUpdate = () => {
-  const sliderValue = sliderElement.noUiSlider.get();
+  const sliderValue = slider.noUiSlider.get();
   effectLevelValue.value = sliderValue;
   imageUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
 };
 
-noUiSlider.create(sliderElement, {
+noUiSlider.create(slider, {
   range: {
     min:  DEFAULT_EFFECT.min,
     max:  DEFAULT_EFFECT.max,
@@ -147,7 +148,7 @@ const onFormChange = (evt) => {
 };
 
 form.addEventListener('change', onFormChange);
-sliderElement.noUiSlider.on('update', onSliderUpdate);
+slider.noUiSlider.on('update', onSliderUpdate);
 
 export {initEffects, resetEffects};
 
