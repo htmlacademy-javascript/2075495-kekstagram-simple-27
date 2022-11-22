@@ -11,17 +11,17 @@ const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const submitButton = form.querySelector('#upload-submit');
 
-function onModalEscKeydown (evt) {
+const onModalEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeModal();
   }
-}
-function onCancelButtonClick () {
-  closeModal();
-}
+};
 
-// открывает окно редактирования фото
+const onCancelButtonClick = () => {
+  closeModal();
+};
+
 function openModal () {
   imageUploadForm.classList.remove('hidden');
   body.classList.add('.modal-open');
@@ -31,7 +31,6 @@ function openModal () {
   initEffects();
 }
 
-// закрывает окно редактирования фото
 function closeModal () {
   imageUploadForm.classList.add('hidden');
   body.classList.remove('.modal-open');
@@ -61,7 +60,7 @@ const onError = () => {
 };
 
 
-function initForm () {
+const initForm = () => {
   uploadFileInput.addEventListener('change', () => {
     openModal();
   });
@@ -73,7 +72,7 @@ function initForm () {
         unblockSubmitButton();
       });
   });
-}
+};
 
 
 export {initForm};

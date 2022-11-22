@@ -35,16 +35,16 @@ const onCloseButtonClick = () => {
   closePopup();
 };
 
-function onDocumentKeydown(evt) {
+const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closePopup();
   }
-}
+};
 
-function onDocumentClick() {
+const onDocumentClick = () => {
   closePopup();
-}
+};
 
 function openSuccessPopup() {
   const successPopup = successPopupTemplate.cloneNode(true);
