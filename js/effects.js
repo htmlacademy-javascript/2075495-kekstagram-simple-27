@@ -1,9 +1,3 @@
-const imageUploadPreview = document.querySelector('.img-upload__preview');
-const effectLevel = document.querySelector('.effect-level');
-const form = document.querySelector('.img-upload__form');
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectLevelValue = document.querySelector('.effect-level__value');
-
 const EFFECTS = [
   {
     name: 'none',
@@ -54,9 +48,16 @@ const EFFECTS = [
 ];
 
 const DEFAULT_EFFECT = EFFECTS[0];
+
 let chosenEffect = DEFAULT_EFFECT;
 
 const isDefaultEffect = () => chosenEffect === DEFAULT_EFFECT;
+
+const imageUploadPreview = document.querySelector('.img-upload__preview');
+const effectLevel = document.querySelector('.effect-level');
+const form = document.querySelector('.img-upload__form');
+const sliderElement = document.querySelector('.effect-level__slider');
+const effectLevelValue = document.querySelector('.effect-level__value');
 
 const removePreviousEffect = function () {
   const prevClasses = imageUploadPreview.className.split(' ');
