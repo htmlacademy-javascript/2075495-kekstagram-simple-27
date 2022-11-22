@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from './form.js';
 
 const ALERT_SHOW_TIME = 5000;
 
