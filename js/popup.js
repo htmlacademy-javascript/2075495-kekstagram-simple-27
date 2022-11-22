@@ -49,6 +49,7 @@ function onDocumentClick() {
 function openSuccessPopup() {
   const successPopup = successPopupTemplate.cloneNode(true);
   successPopup.querySelector('.button').addEventListener('click', onCloseButtonClick);
+  document.body.appendChild(successPopup);
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
@@ -56,6 +57,7 @@ function openSuccessPopup() {
 function openErrorPopup() {
   const errorPopup = errorPopupTemplate.cloneNode(true);
   errorPopup.querySelector('.button').addEventListener('click', onCloseButtonClick);
+  document.body.appendChild(errorPopup);
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }

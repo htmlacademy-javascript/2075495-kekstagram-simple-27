@@ -40,6 +40,7 @@ function closeModal () {
   uploadFileInput.value = '';
   resetScale();
   resetEffects();
+  form.reset();
 }
 
 const blockSubmitButton = () => {
