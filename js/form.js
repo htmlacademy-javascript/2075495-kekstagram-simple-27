@@ -53,6 +53,7 @@ const unblockSubmitButton = () => {
 
 const onSuccess = () => {
   openSuccessPopup();
+  closeModal();
 };
 
 const onError = () => {
@@ -69,7 +70,6 @@ function initForm () {
     blockSubmitButton();
     sendData(onSuccess, onError, new FormData(evt.target))
       .then(() => {
-        closeModal();
         unblockSubmitButton();
       });
   });
