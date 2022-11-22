@@ -4,6 +4,7 @@ const Scale = {
   MAX: 100,
   DEFAULT: 100,
 };
+
 const controlDec = document.querySelector('.scale__control--smaller');
 const controlInc = document.querySelector('.scale__control--bigger');
 const scaleInput = document.querySelector('.scale__control--value');

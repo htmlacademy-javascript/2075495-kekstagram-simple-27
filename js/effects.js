@@ -1,4 +1,3 @@
-
 const imageUploadPreview = document.querySelector('.img-upload__preview');
 const effectLevel = document.querySelector('.effect-level');
 const form = document.querySelector('.img-upload__form');
