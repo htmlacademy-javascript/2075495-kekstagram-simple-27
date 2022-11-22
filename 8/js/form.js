@@ -1,4 +1,4 @@
-import { isEscapeKey, isStringLengthValid } from './util.js';
+import { isEscapeKey } from './util.js';
 import { openSuccessPopup, openErrorPopup } from './popup.js';
 import { initEffects, resetEffects} from './effects.js';
 import { initScale, resetScale } from './scale.js';
@@ -40,6 +40,7 @@ function closeModal () {
   uploadFileInput.value = '';
   resetScale();
   resetEffects();
+  form.reset();
 }
 
 const blockSubmitButton = () => {
@@ -65,14 +66,12 @@ function initForm () {
   });
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    if (isStringLengthValid(Comment, Comment.MAX)) {
-      blockSubmitButton();
-      sendData(onSuccess, onError, new FormData(evt.target))
-        .then(() => {
-          closeModal();
-          unblockSubmitButton();
-        });
-    }
+    blockSubmitButton();
+    sendData(onSuccess, onError, new FormData(evt.target))
+      .then(() => {
+        closeModal();
+        unblockSubmitButton();
+      });
   });
 }
 
