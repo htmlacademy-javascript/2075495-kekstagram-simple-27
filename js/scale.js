@@ -45,29 +45,5 @@ const initScale = () => {
   controlInc.addEventListener('click', onControlIncClick);
 };
 
-
-// const onControlDecClick = () => {
-//   controlDec.addEventListener('click', (evt) => {
-//     evt.preventDefault();
-//     const scaleValue = getScaleValue();
-//     const newScaleValue = scaleValue - Scale.STEP;
-//     if (newScaleValue >= Scale.MIN) {
-//       updateScaleValue(newScaleValue);
-//       console.log(updateScaleValue(newScaleValue));
-//     }
-//   });
-// };
-
-// const onControlIncClick = () => {
-//   controlInc.addEventListener('click', (evt) => {
-//     evt.preventDefault();
-//     const scaleValue = getScaleValue();
-//     const newScaleValue = scaleValue + Scale.STEP;
-//     if (newScaleValue <= Scale.MAX) {
-//       updateScaleValue(newScaleValue);
-//     }
-//   });
-// };
-
 export {initScale, resetScale};
 

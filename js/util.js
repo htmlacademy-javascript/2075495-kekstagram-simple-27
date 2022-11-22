@@ -12,16 +12,14 @@ const getRandomNumber = (a, b) => {
   return Math.floor(randomNumber);
 };
 
-getRandomNumber(2,5);
-
 // Функция для проверки максимальной длины строки
 
 const isStringLengthValid = (string, maxLength) => string.length <= maxLength;
 
-isStringLengthValid ('Функция для проверки максимальной длины строки', 5);
+// isStringLengthValid ('Функция для проверки максимальной длины строки', 5);
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 const isEscapeKey = (evt) => evt.keyCode === 27;
 
-export {getRandomArrayElement, getRandomNumber, isEscapeKey};
+export {getRandomArrayElement, getRandomNumber, isEscapeKey, isStringLengthValid};

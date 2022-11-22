@@ -81,23 +81,26 @@ const applyNewEffect = function () {
   imageUploadPreview.classList.add(newEffectClass);
 };
 
-const showSliderElement = () => sliderElement.classList.remove('hidden');
-const hideSliderElement = () => sliderElement.classList.add('hidden');
-
 const updateSlider = () => {
-  showEffectLevel();
-  showSliderElement();
-  sliderElement.noUiSlider.updateOptions({
-    range: {
-      min: chosenEffect.min,
-      max: chosenEffect.max,
-    },
-    step: chosenEffect.step,
-    start: chosenEffect.max,
-  });
+  if (isDefaultEffect()) {
+    imageUploadPreview.style.filter = '';
+    effectLevelValue.value = '';
+    hideEffectLevel();
+  } else {
+    showEffectLevel();
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: chosenEffect.min,
+        max: chosenEffect.max,
+      },
+      step: chosenEffect.step,
+      start: chosenEffect.max,
+    });
+  }
 };
 
 const resetEffects = function () {
+  hideEffectLevel();
   chosenEffect = DEFAULT_EFFECT;
   removePreviousEffect();
   updateSlider();
@@ -111,12 +114,6 @@ const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
   effectLevelValue.value = sliderValue;
   imageUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
-
-  if (isDefaultEffect()) {
-    hideSliderElement();
-    imageUploadPreview.style.filter = '';
-    effectLevelValue.value = '';
-  }
 };
 
 noUiSlider.create(sliderElement, {
