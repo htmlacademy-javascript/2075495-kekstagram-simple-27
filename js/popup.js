@@ -62,7 +62,7 @@ const openErrorPopup = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closePopup () {
+function closePopup() {
   const popup = document.querySelector('.popup');
   popup.querySelector('.button').removeEventListener('click', onCloseButtonClick);
   popup.remove();

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://27.javascript.pages.academy/kekstagram-simpl';
+const BASE_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 /**
  * Функция для получения данных с сервера методом GET
  * @param {Function} onSuccess - коллбэк функция, которая вызывается при успешном ответе с сервера

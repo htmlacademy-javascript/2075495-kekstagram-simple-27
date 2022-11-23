@@ -13,11 +13,9 @@ const submitButton = form.querySelector('.img-upload__submit');
 const isEscapeKey = (evt) => evt.keyCode === 27;
 
 const onModalEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !document.querySelector('. error')) {
     evt.preventDefault();
-    if (!document.querySelector('.error')) {
-      closeModal();
-    }
+    closeModal();
   }
 };
 
@@ -25,16 +23,16 @@ const onCancelButtonClick = () => {
   closeModal();
 };
 
-function openModal () {
+const openModal = () => {
   imageUploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onModalEscKeydown);
   cancelButton.addEventListener('click', onCancelButtonClick);
   initScale();
   initEffects();
-}
+};
 
-function closeModal () {
+function closeModal() {
   imageUploadForm.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onModalEscKeydown);
