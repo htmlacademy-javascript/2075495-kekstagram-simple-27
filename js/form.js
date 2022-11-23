@@ -15,7 +15,9 @@ const isEscapeKey = (evt) => evt.keyCode === 27;
 const onModalEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeModal();
+    if (!document.querySelector('.error')) {
+      closeModal();
+    }
   }
 };
 
@@ -25,7 +27,7 @@ const onCancelButtonClick = () => {
 
 function openModal () {
   imageUploadForm.classList.remove('hidden');
-  body.classList.add('.modal-open');
+  body.classList.add('modal-open');
   document.addEventListener('keydown', onModalEscKeydown);
   cancelButton.addEventListener('click', onCancelButtonClick);
   initScale();
@@ -34,7 +36,7 @@ function openModal () {
 
 function closeModal () {
   imageUploadForm.classList.add('hidden');
-  body.classList.remove('.modal-open');
+  body.classList.remove('modal-open');
   document.removeEventListener('keydown', onModalEscKeydown);
   cancelButton.removeEventListener('click', onCancelButtonClick);
   uploadFileInput.value = '';
